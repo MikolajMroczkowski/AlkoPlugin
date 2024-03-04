@@ -1,0 +1,4 @@
+name: AlkoPlugin
+version: '${project.version}'
+main: pl.miki.alkoplugin.AlkoPlugin
+api-version: '1.20'
