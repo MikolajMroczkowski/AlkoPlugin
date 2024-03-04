@@ -1,4 +1,4 @@
-package pl.miki.superPlugin.Data;
+package pl.miki.alkoplugin.Data;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import static pl.miki.superPlugin.MainPlugin.plugin;
+import static pl.miki.alkoplugin.AlkoPlugin.plugin;
 
 public class HomeData {
 

@@ -1,4 +1,4 @@
-package pl.miki.superPlugin.Commands;
+package pl.miki.alkoplugin.Commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,9 +18,7 @@ public class TopCommand implements CommandExecutor {
                 Location playerLoc = player.getLocation();
                 Block safeBlock = player.getWorld().getHighestBlockAt(playerLoc);
                 Location safeLocation = safeBlock.getLocation().add(0,1,0);
-                player.sendMessage(safeLocation.toString()) ;
-                player.sendMessage(playerLoc.getBlock().getLocation().toString()) ;
-                if(playerLoc.getBlock().getLocation()==safeLocation){
+                if(playerLoc.getBlockY()==safeLocation.getBlockY()){
                     sender.sendMessage(ChatColor.GREEN+"Już jesteś top");
                 }
                 else{
@@ -28,14 +26,13 @@ public class TopCommand implements CommandExecutor {
                     player.setLevel(level-1);
                 }
 
-                return false;
+                return true;
 
             } else {
                 player.sendMessage(ChatColor.RED+"Nie stać cię"+ChatColor.BOLD+" BIEDAKU"+ChatColor.RESET+ChatColor.RED+" Zbierz 1 lvl");
             }
         } else {
             sender.sendMessage("You must be a player!");
-            return false;
         }
         return false;
     }

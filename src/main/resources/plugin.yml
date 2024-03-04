@@ -1,4 +1,19 @@
 name: AlkoPlugin
 version: '${project.version}'
 main: pl.miki.alkoplugin.AlkoPlugin
+prefix: ALKOPLUGIN
+author: Miki
 api-version: '1.20'
+commands:
+  setHome:
+    description: Ustawia miejsce domku
+    usage: /<command>
+  home:
+    description: Teleportuje do domku
+    usage: /<command>
+  top:
+    description: Powrót na góre
+    usage: /<command>
+  teleport:
+    description: Teleportuje do gracza
+    usage: /<command> <player>

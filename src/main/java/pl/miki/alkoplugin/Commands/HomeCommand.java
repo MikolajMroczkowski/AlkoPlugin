@@ -1,4 +1,4 @@
-package pl.miki.superPlugin.Commands;
+package pl.miki.alkoplugin.Commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import pl.miki.superPlugin.Data.HomeData;
+import pl.miki.alkoplugin.Data.HomeData;
 
 public class HomeCommand implements CommandExecutor {
     @Override
