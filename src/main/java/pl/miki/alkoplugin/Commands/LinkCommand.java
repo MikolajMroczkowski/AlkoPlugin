@@ -3,17 +3,14 @@ package pl.miki.alkoplugin.Commands;
 import net.dv8tion.jda.api.entities.Guild;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.miki.alkoplugin.Data.Configuration;
-import pl.miki.alkoplugin.Data.HomeData;
 import pl.miki.alkoplugin.Data.Linker;
 
-import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static pl.miki.alkoplugin.AlkoPlugin.bot;
 import static pl.miki.alkoplugin.AlkoPlugin.plugin;
@@ -31,13 +28,16 @@ public class LinkCommand implements CommandExecutor {
                 if (guildID != null && bot != null) {
                     Guild g = bot.jda.getGuildById(guildID);
                     if (g != null) {
+                        AtomicBoolean worked = new AtomicBoolean(false);
                         g.getMembersByName(discordName, true).forEach(member -> {
                             if (member.getUser().getName().equals(discordName)) {
                                 String dcID = member.getId();
                                 Linker linker = new Linker();
                                 linker.link(player.getName(), dcID);
+                                worked.set(true);
                             }
                         });
+                        return worked.get();
 
                     } else {
                         plugin.getLogger().info("Guild is null");

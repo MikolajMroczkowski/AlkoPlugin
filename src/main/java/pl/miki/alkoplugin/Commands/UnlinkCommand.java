@@ -25,6 +25,7 @@ public class UnlinkCommand implements CommandExecutor {
             Player player = (Player) sender;
             Linker linker = new Linker();
             linker.unlinkByMCNick(player.getName());
+            return true;
         } else {
             sender.sendMessage("You must be a player!");
         }
