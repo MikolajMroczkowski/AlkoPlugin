@@ -1,6 +1,8 @@
 package pl.miki.alkoplugin.Commands;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,11 +24,18 @@ public class HomeCommand implements CommandExecutor {
                     player.teleport(home);
                 }
                 else{
-                    player.sendMessage(ChatColor.RED+"Nie stać cię"+ChatColor.BOLD+" BIEDAKU"+ChatColor.RESET+ChatColor.RED+" Zbierz 3 lvl");
+                    player.sendMessage(
+                            Component.text()
+                                    .content("Nie stać cię ")
+                                    .color(NamedTextColor.RED)
+                                    .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
+                                    .append(Component.text(", zbierz 3 lvl")));
                 }
             }
             else{
-                player.sendMessage(ChatColor.RED+"Nie masz domu :c");
+                player.sendMessage(Component.text()
+                        .content("Nie masz domu :c")
+                        .color(NamedTextColor.RED));
             }
         } else {
             sender.sendMessage("You must be a player!");

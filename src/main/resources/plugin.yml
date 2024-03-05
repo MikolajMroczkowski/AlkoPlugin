@@ -6,14 +6,14 @@ author: Miki
 api-version: '1.20'
 commands:
   setHome:
-    description: Ustawia miejsce domku
+    description: Ustawia miejsce domku (Koszt 7lvl)
     usage: /<command>
   home:
-    description: Teleportuje do domku
+    description: Teleportuje do domku (Koszt 3lvl)
     usage: /<command>
   top:
-    description: Powrót na góre
+    description: Powrót na góre (Koszt 1lvl)
     usage: /<command>
   teleport:
-    description: Teleportuje do gracza
+    description: Teleportuje do gracza (Koszt 5lvl)
     usage: /<command> <player>

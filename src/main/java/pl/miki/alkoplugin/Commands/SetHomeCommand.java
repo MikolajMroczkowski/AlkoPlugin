@@ -1,6 +1,8 @@
 package pl.miki.alkoplugin.Commands;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,10 +18,17 @@ public class SetHomeCommand implements CommandExecutor {
                 player.setLevel(level-7);
                 HomeData hd = new HomeData();
                 hd.setPlayerHome(player);
-                player.sendMessage( ChatColor.GREEN+"Wiem gdzie mieszkasz");
+                player.sendMessage(Component.text()
+                        .content("Wiem gdzie mieszkasz :D")
+                        .color(NamedTextColor.GREEN));
             }
             else{
-                player.sendMessage(ChatColor.RED+"Nie stać cię"+ChatColor.BOLD+" BIEDAKU"+ChatColor.RESET+ChatColor.RED+" Zbierz 7 lvl");
+                player.sendMessage(
+                        Component.text()
+                                .content("Nie stać cię ")
+                                .color(NamedTextColor.RED)
+                                .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
+                                .append(Component.text(", zbierz 7 lvl")));
             }
 
         } else {
