@@ -17,3 +17,9 @@ commands:
   teleport:
     description: Teleportuje do gracza (Koszt 5lvl)
     usage: /<command> <player>
+  link:
+    description: łączy z kontem discord
+    usage: /<command> <nick minecraft>
+  unlink:
+    description: rozłącza z kontem discord
+    usage: /<command>

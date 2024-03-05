@@ -2,16 +2,20 @@ package pl.miki.alkoplugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.miki.alkoplugin.Commands.*;
+import pl.miki.alkoplugin.Data.Linker;
+import pl.miki.alkoplugin.Data.NickCache;
+import pl.miki.alkoplugin.Discord.Bot;
 import pl.miki.alkoplugin.Events.*;
 import pl.miki.alkoplugin.Data.Configuration;
+import pl.miki.alkoplugin.TabCompleters.LinkTabCompleter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public final class AlkoPlugin extends JavaPlugin {
 
     public static org.bukkit.plugin.Plugin plugin = null;
+    public static pl.miki.alkoplugin.Discord.Bot bot = null;
     @Override
     public void onEnable() {
         this.getLogger().info("AlkoPlugin has been enabled");
@@ -19,15 +23,21 @@ public final class AlkoPlugin extends JavaPlugin {
         plugin = this;
         this.getServer().getPluginManager().registerEvents(new BeautyChat(), this);
         this.getServer().getPluginManager().registerEvents(new ChatToDiscord(), this);
+        this.getServer().getPluginManager().registerEvents(new LinkInformation(), this);
+        this.getCommand("link").setTabCompleter(new LinkTabCompleter());
         this.getCommand("setHome").setExecutor(new SetHomeCommand());
         this.getCommand("home").setExecutor(new HomeCommand());
         this.getCommand("top").setExecutor(new TopCommand());
         this.getCommand("teleport").setExecutor(new TeleportCommand());
+        this.getCommand("unlink").setExecutor(new UnlinkCommand());
+        this.getCommand("link").setExecutor(new LinkCommand());
         if (!this.getDataFolder().exists()) {
             this.getDataFolder().mkdir();
         }
         File homeFile = new File(getDataFolder(), "homes.yml");
         File configFile = new File(getDataFolder(), "config.yml");
+        File linksFile = new File(getDataFolder(), "links.yml");
+        File cacheFile = new File(getDataFolder(), "nickCache.yml");
         if(!homeFile.exists()) {
             try {
                 homeFile.createNewFile();
@@ -44,12 +54,40 @@ public final class AlkoPlugin extends JavaPlugin {
                 e.printStackTrace();
             }
         }
+        if(!linksFile.exists()) {
+            try {
+                linksFile.createNewFile();
+                Linker link = new Linker();
+                link.initiateConfig();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!cacheFile.exists()) {
+            try {
+                cacheFile.createNewFile();
+                NickCache nc = new NickCache();
+                nc.initiateConfig();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Configuration config = new Configuration();
+        if(config.getDiscordToken()!=null){
+            bot = new Bot(config.getDiscordToken());
+        }
+        else{
+            this.getLogger().warning("Discord token is not set");
+        }
         this.getLogger().info("AlkoPlugin started successfully");
 
     }
 
     @Override
     public void onDisable() {
+        this.getLogger().info("AlkoPlugin stopping...");
+        bot.jda.shutdown();
+        this.getLogger().info("AlkoPlugin successfully stoped");
         this.getLogger().info("AlkoPlugin has been disabled");
         // Plugin shutdown logic
     }
