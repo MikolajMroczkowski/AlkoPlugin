@@ -21,6 +21,7 @@ public class SetHomeCommand implements CommandExecutor {
                 player.sendMessage(Component.text()
                         .content("Wiem gdzie mieszkasz :D")
                         .color(NamedTextColor.GREEN));
+                return true;
             }
             else{
                 player.sendMessage(

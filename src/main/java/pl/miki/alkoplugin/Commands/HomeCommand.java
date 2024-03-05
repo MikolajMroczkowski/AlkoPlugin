@@ -22,6 +22,7 @@ public class HomeCommand implements CommandExecutor {
                 if(level >= 3){
                     player.setLevel(level-3);
                     player.teleport(home);
+                    return true;
                 }
                 else{
                     player.sendMessage(
