@@ -31,7 +31,7 @@ public class HomeCommand implements CommandExecutor {
                                     .content("Nie stać cię ")
                                     .color(NamedTextColor.RED)
                                     .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                    .append(Component.text(", zbierz 15 litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
+                                    .append(Component.text(", zbierz "+(15-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
                 }
             }
             else{
