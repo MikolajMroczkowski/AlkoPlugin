@@ -6,16 +6,16 @@ author: Miki
 api-version: '1.20'
 commands:
   setHome:
-    description: Ustawia miejsce domku (Koszt 7lvl)
+    description: Ustawia miejsce domku (Koszt 7 czystej)
     usage: /<command>
   home:
-    description: Teleportuje do domku (Koszt 3lvl)
+    description: Teleportuje do domku (Koszt 3 czystej)
     usage: /<command>
   top:
-    description: Powrót na góre (Koszt 1lvl)
+    description: Powrót na góre (Koszt 1 czystej)
     usage: /<command>
   teleport:
-    description: Teleportuje do gracza (Koszt 5lvl)
+    description: Teleportuje do gracza (Koszt 5 czystej)
     usage: /<command> <player>
   link:
     description: łączy z kontem discord
