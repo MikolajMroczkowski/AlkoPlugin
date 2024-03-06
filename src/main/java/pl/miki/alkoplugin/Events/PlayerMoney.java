@@ -31,7 +31,7 @@ public class PlayerMoney implements Listener {
             @Override
             public void run() {
                 MoneyManager.addMoney(playerName,20);
-                event.getPlayer().sendMessage(Component.text("Dostałeś 10 litrów czystej :D za 10 minut aktywności").color(NamedTextColor.GOLD).decoration(TextDecoration.BOLD,true));
+                event.getPlayer().sendMessage(Component.text("Dostałeś 20 litrów czystej :D za 10 minut aktywności").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC,true));
             }
         };
         runable.runTaskTimerAsynchronously(plugin, 20*60*10, 20*60*10);

@@ -20,8 +20,8 @@ public class HomeCommand implements CommandExecutor {
             HomeData hd = new HomeData();
             Location home = hd.checkHomeForPlayer(player);
             if(home!=null){
-                if(money >= 15){
-                    MoneyManager.removeMoney(player.getName(),15);
+                if(money >= 40){
+                    MoneyManager.removeMoney(player.getName(),40);
                     player.teleport(home);
                     return true;
                 }
@@ -31,7 +31,7 @@ public class HomeCommand implements CommandExecutor {
                                     .content("Nie stać cię ")
                                     .color(NamedTextColor.RED)
                                     .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                    .append(Component.text(", zbierz "+(15-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
+                                    .append(Component.text(", zbierz "+(40-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
                 }
             }
             else{

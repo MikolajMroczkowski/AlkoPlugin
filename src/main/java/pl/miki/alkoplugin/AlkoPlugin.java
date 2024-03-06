@@ -31,6 +31,7 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getCommand("teleport").setExecutor(new TeleportCommand());
         this.getCommand("unlink").setExecutor(new UnlinkCommand());
         this.getCommand("link").setExecutor(new LinkCommand());
+        this.getCommand("pierun").setExecutor(new PierunCommand());
         if (!this.getDataFolder().exists()) {
             this.getDataFolder().mkdir();
         }
