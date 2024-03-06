@@ -29,8 +29,6 @@ public class BeautyChat implements Listener {
                 }
                 String dcNick = nc.getUserNick(dcID);
                 String guildID = config.getDiscordGuild();
-                plugin.getLogger().info(guildID);
-                plugin.getLogger().info(dcID);
                 return Component.text("")
                         .append(Component.text("[MC] ").color(NamedTextColor.DARK_BLUE).decoration(TextDecoration.BOLD, true))
                         .append(Component.text(dcNick).color(NamedTextColor.DARK_AQUA).decoration(TextDecoration.BOLD, true))

@@ -7,17 +7,21 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import pl.miki.alkoplugin.Discord.Listeners.CommandsListener;
 import pl.miki.alkoplugin.Discord.Listeners.DiscordToChat;
+import pl.miki.alkoplugin.Discord.Listeners.MoneyListener;
 
 public class Bot {
     public JDA jda;
     public Bot(String token){
-        JDABuilder builder =  JDABuilder.createLight(token,GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS);
+        JDABuilder builder =  JDABuilder.create(token,GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS,GatewayIntent.GUILD_VOICE_STATES);
         builder.setActivity(Activity.playing("Minecraft"));
         builder.setMemberCachePolicy(MemberCachePolicy.ALL);
+        builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.CLIENT_STATUS, CacheFlag.ONLINE_STATUS, CacheFlag.SCHEDULED_EVENTS);
         builder.addEventListeners(new CommandsListener());
         builder.addEventListeners(new DiscordToChat());
+        builder.addEventListeners(new MoneyListener());
         try {
             jda = builder.build();
             registerCommands();

@@ -8,14 +8,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.miki.alkoplugin.Data.HomeData;
+import pl.miki.alkoplugin.Managers.MoneyManager;
+
 public class SetHomeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            int level =  player.getLevel();
-            if(level >= 7){
-                player.setLevel(level-7);
+            int level =  MoneyManager.getMoney(player.getName());
+            if(level >= 50){
+                MoneyManager.removeMoney(player.getName(),50);
                 HomeData hd = new HomeData();
                 hd.setPlayerHome(player);
                 player.sendMessage(Component.text()
@@ -29,7 +31,7 @@ public class SetHomeCommand implements CommandExecutor {
                                 .content("Nie stać cię ")
                                 .color(NamedTextColor.RED)
                                 .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                .append(Component.text(", zbierz 7 lvl")));
+                                .append(Component.text(", zbierz 50 litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
             }
 
         } else {

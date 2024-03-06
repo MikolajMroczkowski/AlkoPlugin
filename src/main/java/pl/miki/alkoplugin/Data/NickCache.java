@@ -84,7 +84,6 @@ public class NickCache {
     }
     public void reFetchCache(){
         for(String key : configuration.getKeys(false)){
-            plugin.getLogger().info(key.split("\\|")[0]);
             if(key.split("\\|")[1].equals("NICK")){
                 fetchNickIntoCache(key.split("\\|")[0]);
             }

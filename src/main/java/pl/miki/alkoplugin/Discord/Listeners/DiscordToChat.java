@@ -24,15 +24,15 @@ public class DiscordToChat extends ListenerAdapter {
         Linker linker = new Linker();
         String mcNick = "NOT-LINKED";
         String linkerNick = linker.getUserByDCID(event.getAuthor().getId());
-        if (linkerNick == null) {
-            event.getMessage().delete().queue();
-            event.getAuthor().openPrivateChannel().queue(channel -> {
-                channel.sendMessage("Twoje konto discord nie jest połączone z kontem minecraft. Użyj komendy /link <Nazwa konta minecraft> na serwerze discord aby połączyć konto lub /link <nazwa konta discord> na serwerze mc").queue();
-            });
-            return;
-        }
         mcNick = linkerNick;
         if (config.getDiscordChannel().equals(id)) {
+            if (linkerNick == null) {
+                event.getMessage().delete().queue();
+                event.getAuthor().openPrivateChannel().queue(channel -> {
+                    channel.sendMessage("Twoje konto discord nie jest połączone z kontem minecraft. Użyj komendy /link <Nazwa konta minecraft> na serwerze discord aby połączyć konto lub /link <nazwa konta discord> na serwerze mc").queue();
+                });
+                return;
+            }
             plugin.getServer().sendMessage(Component.text("")
                     .append(Component.text("[DC] ").color(NamedTextColor.BLUE).decoration(TextDecoration.BOLD, true))
                     .append(Component.text(nick).color(NamedTextColor.DARK_PURPLE).decoration(TextDecoration.BOLD, true))

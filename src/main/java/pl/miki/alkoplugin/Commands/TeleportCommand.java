@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import pl.miki.alkoplugin.Managers.MoneyManager;
 
 
 public class TeleportCommand implements CommandExecutor {
@@ -14,8 +15,8 @@ public class TeleportCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            int level =  player.getLevel();
-            if(level >= 5){
+            int level = MoneyManager.getMoney(player.getName());
+            if(level >= 30){
                 if(args.length==1){
                     Player target = player.getServer().getPlayer(args[0]);
                     if(target!=null){
@@ -27,7 +28,7 @@ public class TeleportCommand implements CommandExecutor {
                             return true;
                         }
                         player.teleport(target);
-                        player.setLevel(level-5);
+                        MoneyManager.removeMoney(player.getName(),40);
                         player.sendMessage(
                                 Component.text()
                                         .content("Teleportowałeś się do ")
@@ -57,12 +58,12 @@ public class TeleportCommand implements CommandExecutor {
                 }
             }
             else{
-                player.sendMessage(
-                        Component.text()
-                                .content("Nie stać cię ")
-                                .color(NamedTextColor.RED)
-                                .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                .append(Component.text(", zbierz 5 lvl")));
+                        player.sendMessage(
+                                Component.text()
+                                        .content("Nie stać cię ")
+                                        .color(NamedTextColor.RED)
+                                        .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
+                                        .append(Component.text(", zbierz 30 litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
             }
 
         } else {

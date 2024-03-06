@@ -25,6 +25,7 @@ public class UnlinkCommand implements CommandExecutor {
             Player player = (Player) sender;
             Linker linker = new Linker();
             linker.unlinkByMCNick(player.getName());
+            player.sendMessage(Component.text("Konto rozłączone poprawnie").color(NamedTextColor.GREEN));
             return true;
         } else {
             sender.sendMessage("You must be a player!");

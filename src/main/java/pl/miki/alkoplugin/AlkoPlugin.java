@@ -2,11 +2,9 @@ package pl.miki.alkoplugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.miki.alkoplugin.Commands.*;
-import pl.miki.alkoplugin.Data.Linker;
-import pl.miki.alkoplugin.Data.NickCache;
-import pl.miki.alkoplugin.Discord.Bot;
+import pl.miki.alkoplugin.Data.*;
 import pl.miki.alkoplugin.Events.*;
-import pl.miki.alkoplugin.Data.Configuration;
+import pl.miki.alkoplugin.Discord.Bot;
 import pl.miki.alkoplugin.TabCompleters.LinkTabCompleter;
 
 import java.io.File;
@@ -16,6 +14,7 @@ public final class AlkoPlugin extends JavaPlugin {
 
     public static org.bukkit.plugin.Plugin plugin = null;
     public static pl.miki.alkoplugin.Discord.Bot bot = null;
+
     @Override
     public void onEnable() {
         this.getLogger().info("AlkoPlugin has been enabled");
@@ -24,6 +23,7 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BeautyChat(), this);
         this.getServer().getPluginManager().registerEvents(new ChatToDiscord(), this);
         this.getServer().getPluginManager().registerEvents(new LinkInformation(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerMoney(), this);
         this.getCommand("link").setTabCompleter(new LinkTabCompleter());
         this.getCommand("setHome").setExecutor(new SetHomeCommand());
         this.getCommand("home").setExecutor(new HomeCommand());
@@ -38,14 +38,15 @@ public final class AlkoPlugin extends JavaPlugin {
         File configFile = new File(getDataFolder(), "config.yml");
         File linksFile = new File(getDataFolder(), "links.yml");
         File cacheFile = new File(getDataFolder(), "nickCache.yml");
-        if(!homeFile.exists()) {
+        File xpCache = new File(getDataFolder(), "money.yml");
+        if (!homeFile.exists()) {
             try {
                 homeFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        if(!configFile.exists()) {
+        if (!configFile.exists()) {
             try {
                 configFile.createNewFile();
                 Configuration c = new Configuration();
@@ -54,7 +55,7 @@ public final class AlkoPlugin extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-        if(!linksFile.exists()) {
+        if (!linksFile.exists()) {
             try {
                 linksFile.createNewFile();
                 Linker link = new Linker();
@@ -63,7 +64,7 @@ public final class AlkoPlugin extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-        if(!cacheFile.exists()) {
+        if (!cacheFile.exists()) {
             try {
                 cacheFile.createNewFile();
                 NickCache nc = new NickCache();
@@ -72,11 +73,19 @@ public final class AlkoPlugin extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-        Configuration config = new Configuration();
-        if(config.getDiscordToken()!=null){
-            bot = new Bot(config.getDiscordToken());
+        if (!xpCache.exists()) {
+            try {
+                xpCache.createNewFile();
+                MoneyStore xc = new MoneyStore();
+                xc.initiateConfig();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        else{
+        Configuration config = new Configuration();
+        if (config.getDiscordToken() != null) {
+            bot = new Bot(config.getDiscordToken());
+        } else {
             this.getLogger().warning("Discord token is not set");
         }
         this.getLogger().info("AlkoPlugin started successfully");

@@ -15,5 +15,6 @@ public class Unlink {
         }
         plugin.getServer().getPlayer(mcNick).sendMessage("Twoje konto discord zostało odłączone od konta minecraft");
         linker.unlinkByDCID(event.getUser().getId());
+        event.reply("Konto odłączone").queue();
     }
 }

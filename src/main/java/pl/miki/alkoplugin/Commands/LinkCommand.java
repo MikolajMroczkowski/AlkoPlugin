@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.miki.alkoplugin.Data.Configuration;
 import pl.miki.alkoplugin.Data.Linker;
+import pl.miki.alkoplugin.Data.NickCache;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -32,11 +33,19 @@ public class LinkCommand implements CommandExecutor {
                         g.getMembersByName(discordName, true).forEach(member -> {
                             if (member.getUser().getName().equals(discordName)) {
                                 String dcID = member.getId();
+                                NickCache nc = new NickCache();
+                                nc.fetchNickIntoCache(member.getId());
                                 Linker linker = new Linker();
                                 linker.link(player.getName(), dcID);
                                 worked.set(true);
                             }
                         });
+                        if(worked.get()){
+                            player.sendMessage(
+                                    Component.text()
+                                            .content("Powiązano konto discord "+discordName+" z twoim kontem minecraft")
+                                            .color(NamedTextColor.GREEN));
+                        }
                         return worked.get();
 
                     } else {
