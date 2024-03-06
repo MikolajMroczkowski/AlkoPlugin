@@ -34,7 +34,7 @@ public class PlayerMoney implements Listener {
                 event.getPlayer().sendMessage(Component.text("Dostałeś 10 litrów czystej :D za 10 minut aktywności").color(NamedTextColor.GOLD).decoration(TextDecoration.BOLD,true));
             }
         };
-        runable.runTaskTimerAsynchronously(plugin, 0, 20*60*10);
+        runable.runTaskTimerAsynchronously(plugin, 20*60*10, 20*60*10);
         events.put(playerName,runable );
     }
     @EventHandler
