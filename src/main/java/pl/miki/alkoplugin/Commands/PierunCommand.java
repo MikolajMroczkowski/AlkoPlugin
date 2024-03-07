@@ -15,12 +15,12 @@ public class PierunCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int money = MoneyManager.getMoney(player.getName());
-            if(money >= 200){
+            if(money >= 100){
                 if(args.length==1){
                     Player target = player.getServer().getPlayer(args[0]);
                     if(target!=null){
                         player.getWorld().strikeLightning(target.getLocation());
-                        MoneyManager.removeMoney(player.getName(),200);
+                        MoneyManager.removeMoney(player.getName(),100);
                         player.sendMessage(
                                 Component.text()
                                         .content("Jebłeś piorunem ")
@@ -55,7 +55,7 @@ public class PierunCommand implements CommandExecutor {
                                 .content("Nie stać cię ")
                                 .color(NamedTextColor.RED)
                                 .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                .append(Component.text(", zbierz "+(200-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
+                                .append(Component.text(", zbierz "+(100-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
             }
 
         } else {

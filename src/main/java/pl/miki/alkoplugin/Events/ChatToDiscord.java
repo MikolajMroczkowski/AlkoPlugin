@@ -1,8 +1,6 @@
 package pl.miki.alkoplugin.Events;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -11,11 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import pl.miki.alkoplugin.Data.Configuration;
+import pl.miki.alkoplugin.Data.Linker;
 import pl.miki.alkoplugin.Data.NickCache;
 import pl.miki.alkoplugin.Discord.DiscordWebhook;
-import pl.miki.alkoplugin.Data.Linker;
 
-import static pl.miki.alkoplugin.AlkoPlugin.bot;
 import static pl.miki.alkoplugin.AlkoPlugin.plugin;
 
 public class ChatToDiscord implements Listener {

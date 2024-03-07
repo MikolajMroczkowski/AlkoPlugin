@@ -16,7 +16,7 @@ public class TeleportCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int money = MoneyManager.getMoney(player.getName());
-            if(money >= 100){
+            if(money >= 35){
                 if(args.length==1){
                     Player target = player.getServer().getPlayer(args[0]);
                     if(target!=null){
@@ -28,7 +28,7 @@ public class TeleportCommand implements CommandExecutor {
                             return true;
                         }
                         player.teleport(target);
-                        MoneyManager.removeMoney(player.getName(),100);
+                        MoneyManager.removeMoney(player.getName(),35);
                         player.sendMessage(
                                 Component.text()
                                         .content("Teleportowałeś się do ")
@@ -63,7 +63,7 @@ public class TeleportCommand implements CommandExecutor {
                                         .content("Nie stać cię ")
                                         .color(NamedTextColor.RED)
                                         .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                        .append(Component.text(", zbierz "+(100-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
+                                        .append(Component.text(", zbierz "+(35-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
             }
 
         } else {

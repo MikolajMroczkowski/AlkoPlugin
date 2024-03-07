@@ -1,7 +1,6 @@
 package pl.miki.alkoplugin.Discord.Commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -20,12 +19,12 @@ public class Link {
         String mcNick = linker.getUserByDCID(event.getUser().getId());
         OptionMapping nickOption = event.getOption("nick");
         if(nickOption==null){
-            event.reply("Podaj nick").queue();
+            event.reply("Podaj nick").setEphemeral(true).queue();
             return;
         }
         String nick = nickOption.getAsString();
         if(nick==mcNick||mcNick!=null){
-            event.reply("Konto jest już połączone, użyj komendy unlink").queue();
+            event.reply("Konto jest już połączone, użyj komendy unlink").setEphemeral(true).queue();
             return;
         }
         if(nick!=null){
@@ -36,22 +35,22 @@ public class Link {
                     linker.link(nick,event.getUser().getId());
                     NickCache nc = new NickCache();
                     nc.fetchNickIntoCache(event.getUser().getId());
-                    player.sendMessage(Component.text("Powiązano konto discord "+event.getUser().getName()+" z twoim kontem minecraft").color(NamedTextColor.GREEN));
-                    event.reply("Powiązano konto minecraft "+nick+" do konta discord "+event.getUser().getEffectiveName()).queue();
+                    player.sendMessage(Component.text("Powiązano konto discord "+event.getUser().getName()+" z twoim kontem minecraft").color(NamedTextColor.DARK_PURPLE));
+                    event.reply("Powiązano konto minecraft "+nick+" do konta discord "+event.getUser().getEffectiveName()).setEphemeral(true).queue();
                     return;
                 }
                 else{
-                    event.reply("Nie znaleziono gracza. Upewnij się że jesteś online w minecraft i spróbuj ponownie").queue();
+                    event.reply("Nie znaleziono gracza. Upewnij się że jesteś online w minecraft i spróbuj ponownie").setEphemeral(true).queue();
                     return;
                 }
             }
             else{
-                event.reply("Nie znaleziono gracza. Upewnij się że jesteś online w minecraft i spróbuj ponownie").queue();
+                event.reply("Nie znaleziono gracza. Upewnij się że jesteś online w minecraft i spróbuj ponownie").setEphemeral(true).queue();
                 return;
             }
         }
         else{
-            event.reply("Nie można odczytać nicku").queue();
+            event.reply("Nie można odczytać nicku").setEphemeral(true).queue();
             return;
         }
 

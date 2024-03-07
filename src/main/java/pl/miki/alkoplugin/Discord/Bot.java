@@ -14,8 +14,9 @@ import pl.miki.alkoplugin.Discord.Listeners.MoneyListener;
 
 public class Bot {
     public JDA jda;
-    public Bot(String token){
-        JDABuilder builder =  JDABuilder.create(token,GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS,GatewayIntent.GUILD_VOICE_STATES);
+
+    public Bot(String token) {
+        JDABuilder builder = JDABuilder.create(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES);
         builder.setActivity(Activity.playing("Minecraft"));
         builder.setMemberCachePolicy(MemberCachePolicy.ALL);
         builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.CLIENT_STATUS, CacheFlag.ONLINE_STATUS, CacheFlag.SCHEDULED_EVENTS);
@@ -29,12 +30,17 @@ public class Bot {
             e.printStackTrace();
         }
     }
-    private void registerCommands(){
+
+    private void registerCommands() {
         jda.updateCommands().addCommands(
-                Commands.slash("unlink", "Unlink minecraft account from discord"),
+                Commands.slash("unlink", "Unlink minecraft account from discord")
+                        .setGuildOnly(true),
+                Commands.slash("connect", "Umożliwia połączenie do serwera mc (osoby ze zlinkowanym kontem discord nie muszą podawać nicku)")
+                        .setGuildOnly(true)
+                        .addOption(OptionType.STRING, "nick", "Nick minecrafta do pozwolenia"),
                 Commands.slash("link", "Link your minecraft account with discord")
                         .setGuildOnly(true)
-                        .addOption(OptionType.STRING, "nick", "Nick minecrafta do połączenia z kontem",true,true)
+                        .addOption(OptionType.STRING, "nick", "Nick minecrafta do połączenia z kontem", true, true)
 
         ).queue();
     }

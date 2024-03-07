@@ -16,8 +16,8 @@ public class SetHomeCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int money =  MoneyManager.getMoney(player.getName());
-            if(money >= 150){
-                MoneyManager.removeMoney(player.getName(),150);
+            if(money >= 70){
+                MoneyManager.removeMoney(player.getName(),70);
                 HomeData hd = new HomeData();
                 hd.setPlayerHome(player);
                 player.sendMessage(Component.text()
@@ -31,7 +31,7 @@ public class SetHomeCommand implements CommandExecutor {
                                 .content("Nie stać cię ")
                                 .color(NamedTextColor.RED)
                                 .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                .append(Component.text(", zbierz "+(150-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
+                                .append(Component.text(", zbierz "+(70-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
             }
 
         } else {

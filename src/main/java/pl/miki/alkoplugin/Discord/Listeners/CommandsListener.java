@@ -1,13 +1,10 @@
 package pl.miki.alkoplugin.Discord.Listeners;
 
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import net.dv8tion.jda.api.interactions.commands.Command;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import pl.miki.alkoplugin.Discord.Commands.Connect;
 import pl.miki.alkoplugin.Discord.Commands.Link;
 import pl.miki.alkoplugin.Discord.Commands.Unlink;
 
@@ -31,8 +28,8 @@ public class CommandsListener extends ListenerAdapter {
             case "unlink":
                 new Unlink().run(event);
                 break;
-            case "ping":
-                event.reply("Pong!").queue();
+            case "connect":
+                new Connect().run(event);
                 break;
             default:
                 System.out.printf("Unknown command %s used by %#s%n", event.getName(), event.getUser());

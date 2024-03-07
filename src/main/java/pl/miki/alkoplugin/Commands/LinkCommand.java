@@ -44,7 +44,10 @@ public class LinkCommand implements CommandExecutor {
                             player.sendMessage(
                                     Component.text()
                                             .content("Powiązano konto discord "+discordName+" z twoim kontem minecraft")
-                                            .color(NamedTextColor.GREEN));
+                                            .color(NamedTextColor.DARK_PURPLE));
+                            bot.jda.getGuildById(config.getDiscordGuild()).getMemberById(new Linker().getUserByMCNick(player.getName())).getUser().openPrivateChannel().queue((channel) -> {
+                                channel.sendMessage("Powiązano konto minecraft "+player.getName()+" do konta discord "+discordName).queue();
+                            });
                         }
                         return worked.get();
 

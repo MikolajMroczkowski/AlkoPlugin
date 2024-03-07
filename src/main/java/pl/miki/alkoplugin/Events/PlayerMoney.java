@@ -3,14 +3,13 @@ package pl.miki.alkoplugin.Events;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import pl.miki.alkoplugin.Data.MoneyStore;
-import pl.miki.alkoplugin.Managers.MainScoreboard;
 import pl.miki.alkoplugin.Managers.MoneyManager;
 
 import java.util.HashMap;
@@ -20,28 +19,46 @@ import static pl.miki.alkoplugin.AlkoPlugin.plugin;
 import static pl.miki.alkoplugin.Managers.MainScoreboard.setScoreboard;
 
 public class PlayerMoney implements Listener {
-    Map<String,BukkitRunnable> events = new HashMap();
+    Map<String,Integer> usersMoney = new HashMap();
+    public PlayerMoney()
+    {
+        BukkitRunnable runable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (String user : usersMoney.keySet()) {
+                    usersMoney.put(user, usersMoney.get(user) + 5);
+                    if (usersMoney.get(user) > 600) {
+                        MoneyManager.addMoney(user,15);
+                        Player p = plugin.getServer().getPlayer(user);
+                        if(p!=null){
+                            p.playSound(p.getLocation(),"minecraft:entity.experience_orb.pickup",1,1);
+                            p.sendMessage(Component.text("Otrzymałeś 15 litrów czystej za bycie online").color(NamedTextColor.GREEN).decoration(TextDecoration.ITALIC,true));
+                        }
+                        usersMoney.put(user, 0);
+                    }
+                }
+            }
+        };
+        runable.runTaskTimerAsynchronously(plugin, 20*5, 20*5);
+    }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
         setScoreboard(event.getPlayer());
         MoneyManager.playerConnected(event.getPlayer());
-        String playerName = event.getPlayer().getName();
-        BukkitRunnable runable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                MoneyManager.addMoney(playerName,20);
-                event.getPlayer().sendMessage(Component.text("Dostałeś 20 litrów czystej :D za 10 minut aktywności").color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC,true));
-            }
-        };
-        runable.runTaskTimerAsynchronously(plugin, 20*60*10, 20*60*10);
-        events.put(playerName,runable );
+        usersMoney.put(event.getPlayer().getName(),0);
+
     }
     @EventHandler
     public void onPlayerLeft(PlayerQuitEvent event)
     {
         MoneyManager.playerDisconnected(event.getPlayer());
-        BukkitRunnable runable =events.get(event.getPlayer().getName());
-        runable.cancel();
+        usersMoney.remove(event.getPlayer().getName());
+    }
+    @EventHandler
+    public void onDeth(PlayerDeathEvent event) {
+        int money = MoneyManager.getMoney(event.getEntity().getName());
+        int moneyLost = (money/10)*2;
+        MoneyManager.removeMoney(event.getEntity().getName(),moneyLost);
     }
 }

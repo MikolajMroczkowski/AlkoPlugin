@@ -1,6 +1,8 @@
 package pl.miki.alkoplugin.Discord.Commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import pl.miki.alkoplugin.Data.Linker;
 
 import static pl.miki.alkoplugin.AlkoPlugin.plugin;
@@ -10,11 +12,11 @@ public class Unlink {
         Linker linker = new Linker();
         String mcNick = linker.getUserByDCID(event.getUser().getId());
         if(mcNick==null){
-            event.reply("Konto nie jest połączone").queue();
+            event.reply("Konto nie jest połączone").setEphemeral(true).queue();
             return;
         }
-        plugin.getServer().getPlayer(mcNick).sendMessage("Twoje konto discord zostało odłączone od konta minecraft");
+        plugin.getServer().getPlayer(mcNick).sendMessage(Component.text("Konto discord "+event.getUser().getName()+" zostało odłączone od twojego konta minecraft").color(NamedTextColor.DARK_PURPLE));
         linker.unlinkByDCID(event.getUser().getId());
-        event.reply("Konto odłączone").queue();
+        event.reply("Konto odłączone").setEphemeral(true).queue();
     }
 }

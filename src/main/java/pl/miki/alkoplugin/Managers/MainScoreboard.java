@@ -6,7 +6,6 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
-import org.w3c.dom.Text;
 
 public class MainScoreboard {
     public static void setScoreboard(Player player) {

@@ -1,15 +1,7 @@
 package pl.miki.alkoplugin.Managers;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import pl.miki.alkoplugin.Data.MoneyStore;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import pl.miki.alkoplugin.Managers.MainScoreboard;
 
 import static pl.miki.alkoplugin.AlkoPlugin.plugin;
 
@@ -44,6 +36,7 @@ public class MoneyManager {
     public static void playerConnected(Player player){
         MoneyStore moneyStore = new MoneyStore();
         int money = moneyStore.getMoney(player.getName());
+
         player.getScoreboard().getObjective(player.getName()).getScore("money").setScore(money);
     }
     public static int getMoney(String playerName) {

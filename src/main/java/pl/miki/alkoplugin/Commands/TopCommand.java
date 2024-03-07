@@ -17,7 +17,7 @@ public class TopCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int money = MoneyManager.getMoney(player.getName());
-            if (money >= 20) {
+            if (money >= 10) {
                 Location playerLoc = player.getLocation();
                 Block safeBlock = player.getWorld().getHighestBlockAt(playerLoc);
                 Location safeLocation = safeBlock.getLocation().add(0,1,0);
@@ -28,7 +28,7 @@ public class TopCommand implements CommandExecutor {
                 }
                 else{
                     player.teleport(safeLocation.add(0.5,0,0.5));
-                    MoneyManager.removeMoney(player.getName(),20);
+                    MoneyManager.removeMoney(player.getName(),10);
                 }
 
                 return true;
@@ -39,7 +39,7 @@ public class TopCommand implements CommandExecutor {
                                 .content("Nie stać cię ")
                                 .color(NamedTextColor.RED)
                                 .append(Component.text().content("BIEDAKU").decoration(TextDecoration.BOLD,true))
-                                .append(Component.text(", zbierz jeszcze "+(20-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
+                                .append(Component.text(", zbierz jeszcze "+(10-money)+" litrów czystej i wróć do mnie!").color(NamedTextColor.RED)));
             }
         } else {
             sender.sendMessage("You must be a player!");
