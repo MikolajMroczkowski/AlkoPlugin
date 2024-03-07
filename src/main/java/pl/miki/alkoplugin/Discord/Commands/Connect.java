@@ -29,9 +29,14 @@ public class Connect {
                 event.reply("Konto nie jest zlinkowane, podaj parametr nick").setEphemeral(true).queue();
                 return;
             }
+            String id = linker.getUserByDCID(event.getUser().getId());
+            String msg = "Nawiązanie połączenia dla konta "+nick+" dozwolone przez minutę";
+            if(id!=null){
+                msg+="\nPowiązane konto discord nie musi podawać nicku";
+            }
             playerTempWhitelist.put(nick,0);
             playerDiscordIDTemp.put(nick,event.getUser().getId());
-            event.reply("Nawiązanie połączenia dla konta "+nick+" dozwolone przez minutę").setEphemeral(true).queue();
+            event.reply(msg).setEphemeral(true).queue();
         }
         else{
             event.reply("Nie można odczytać nicku").setEphemeral(true).queue();

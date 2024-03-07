@@ -46,7 +46,7 @@ public class Protection implements Listener {
             });
             playerDiscordIDTemp.remove(event.getPlayer().getName());
         } else {
-            event.getPlayer().kick(Component.text("").color(NamedTextColor.RED).append(Component.text("Nie zgłosiłeś połączenia").decoration(TextDecoration.BOLD, true)).append(Component.text(", zgłoś je na discordzie! \nużyj /connect lub /connectnolink <Nazwa użytkownika z mc>")));
+            event.getPlayer().kick(Component.text("").color(NamedTextColor.RED).append(Component.text("Nie zgłosiłeś połączenia").decoration(TextDecoration.BOLD, true)).append(Component.text(", zgłoś je na discordzie! \nużyj /connect")).append(Component.text(" (jeśli masz zlinkowane poprawnie konto nie musisz podawać nicku)").decoration(TextDecoration.ITALIC, true)));
             Linker linker = new Linker();
             String dcID = linker.getUserByMCNick(event.getPlayer().getName());
             if (dcID != null) {

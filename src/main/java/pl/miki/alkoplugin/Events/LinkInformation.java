@@ -17,7 +17,6 @@ public class LinkInformation implements Listener {
         String dcID = linker.getUserByMCNick(event.getPlayer().getName());
         NickCache cache = new NickCache();
         cache.reFetchCache();
-        event.getPlayer().sendMessage(Component.text("Witaj na alko-serwerze!").color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD,true));
         if(dcID==null){
             event.getPlayer().sendMessage(Component.text("Aby połączyć konto z Discordem, Wejdź na serwer discord i Wpisz /link <Twój nick Minecraft>").color(NamedTextColor.DARK_GREEN));
             event.getPlayer().sendMessage(Component.text("lub użyj komendy /link <Twój nick discord> bezpośrednio na chacie").color(NamedTextColor.DARK_GREEN));

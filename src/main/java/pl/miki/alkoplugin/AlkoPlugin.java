@@ -27,13 +27,13 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getLogger().info("AlkoPlugin has been enabled");
         this.getLogger().info("AlkoPlugin starting...");
         plugin = this;
-        this.getServer().getPluginManager().registerEvents(new BeautyChat(), this);
-        this.getServer().getPluginManager().registerEvents(new ChatToDiscord(), this);
-        this.getServer().getPluginManager().registerEvents(new Welcome(), this);
-        this.getServer().getPluginManager().registerEvents(new LinkInformation(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoney(), this);
         this.getServer().getPluginManager().registerEvents(new AfkEvent(), this);
         this.getServer().getPluginManager().registerEvents(new Protection(), this);
+        this.getServer().getPluginManager().registerEvents(new Welcome(), this);
+        this.getServer().getPluginManager().registerEvents(new BeautyChat(), this);
+        this.getServer().getPluginManager().registerEvents(new ChatToDiscord(), this);
+        this.getServer().getPluginManager().registerEvents(new LinkInformation(), this);
         this.getCommand("link").setTabCompleter(new LinkTabCompleter());
         this.getCommand("setHome").setExecutor(new SetHomeCommand());
         this.getCommand("home").setExecutor(new HomeCommand());

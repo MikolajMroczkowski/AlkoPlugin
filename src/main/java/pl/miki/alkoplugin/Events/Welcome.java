@@ -12,6 +12,7 @@ public class Welcome implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
+        event.getPlayer().sendMessage(Component.text("Witaj na alko-serwerze!").color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD,true));
         event.joinMessage(Component.text("Witamy ").color(NamedTextColor.DARK_GREEN).append(Component.text(event.getPlayer().getName()).color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD,true)).append(Component.text(" na serwerze!").color(NamedTextColor.DARK_GREEN)));
     }
     public void onPlayerLeft(PlayerQuitEvent event)
