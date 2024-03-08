@@ -8,6 +8,7 @@ import pl.miki.alkoplugin.Data.MoneyStore;
 import pl.miki.alkoplugin.Data.NickCache;
 import pl.miki.alkoplugin.Discord.Bot;
 import pl.miki.alkoplugin.Events.*;
+import pl.miki.alkoplugin.Managers.ShopManager;
 import pl.miki.alkoplugin.TabCompleters.LinkTabCompleter;
 
 import java.io.File;
@@ -34,6 +35,8 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BeautyChat(), this);
         this.getServer().getPluginManager().registerEvents(new ChatToDiscord(), this);
         this.getServer().getPluginManager().registerEvents(new LinkInformation(), this);
+        this.getServer().getPluginManager().registerEvents(new ShopManager(), this);
+        this.getServer().getPluginManager().registerEvents(new SitEvent(), this);
         this.getCommand("link").setTabCompleter(new LinkTabCompleter());
         this.getCommand("setHome").setExecutor(new SetHomeCommand());
         this.getCommand("home").setExecutor(new HomeCommand());
@@ -42,6 +45,7 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getCommand("unlink").setExecutor(new UnlinkCommand());
         this.getCommand("link").setExecutor(new LinkCommand());
         this.getCommand("pierun").setExecutor(new PierunCommand());
+        this.getCommand("shop").setExecutor(new ShopCommand());
         if (!this.getDataFolder().exists()) {
             this.getDataFolder().mkdir();
         }

@@ -26,3 +26,6 @@ commands:
   pierun:
     description: Pieruny (Koszt 200 czystej)
     usage: /<command> <player>
+  shop:
+    description: Sklep
+    usage: /<command>

@@ -15,9 +15,10 @@ public class Welcome implements Listener {
         event.getPlayer().sendMessage(Component.text("Witaj na alko-serwerze!").color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD,true));
         event.joinMessage(Component.text("Witamy ").color(NamedTextColor.DARK_GREEN).append(Component.text(event.getPlayer().getName()).color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD,true)).append(Component.text(" na serwerze!").color(NamedTextColor.DARK_GREEN)));
     }
+    @EventHandler
     public void onPlayerLeft(PlayerQuitEvent event)
     {
-        event.quitMessage(Component.text("Pożegnajmy ").color(NamedTextColor.DARK_RED).append(Component.text(event.getPlayer().getName()).color(NamedTextColor.RED).decoration(TextDecoration.BOLD,true)).append(Component.text("!").color(NamedTextColor.DARK_RED)));
+        event.quitMessage(Component.text("Pożegnajmy gracza ").color(NamedTextColor.DARK_RED).append(Component.text(event.getPlayer().getName()).color(NamedTextColor.RED).decoration(TextDecoration.BOLD,true)).append(Component.text("! odszedł\nTeraz mieszka w naszej pamięci").color(NamedTextColor.DARK_RED)));
     }
 
 }
