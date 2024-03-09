@@ -40,7 +40,6 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new ShopManager(), this);
         this.getServer().getPluginManager().registerEvents(new SitEvent(), this);
         this.getServer().getPluginManager().registerEvents(new MagicPickaxe(), this);
-        //this.getServer().getPluginManager().registerEvents(new BeerPotion(), this);
         this.getCommand("link").setTabCompleter(new LinkTabCompleter());
         this.getCommand("setHome").setExecutor(new SetHomeCommand());
         this.getCommand("home").setExecutor(new HomeCommand());
