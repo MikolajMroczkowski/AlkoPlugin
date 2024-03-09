@@ -1,5 +1,6 @@
 package pl.miki.alkoplugin;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.miki.alkoplugin.Commands.*;
 import pl.miki.alkoplugin.Data.Configuration;
@@ -19,15 +20,16 @@ public final class AlkoPlugin extends JavaPlugin {
 
     public static org.bukkit.plugin.Plugin plugin = null;
     public static pl.miki.alkoplugin.Discord.Bot bot = null;
-
     public static HashMap<String, Integer> playerTempWhitelist = new HashMap();
     public static HashMap<String, String> playerDiscordIDTemp = new HashMap();
+    public static NamespacedKey key;
 
     @Override
     public void onEnable() {
+        plugin = this;
+        key = new NamespacedKey(plugin, "functional-items");
         this.getLogger().info("AlkoPlugin has been enabled");
         this.getLogger().info("AlkoPlugin starting...");
-        plugin = this;
         this.getServer().getPluginManager().registerEvents(new PlayerMoney(), this);
         this.getServer().getPluginManager().registerEvents(new AfkEvent(), this);
         this.getServer().getPluginManager().registerEvents(new Protection(), this);
@@ -37,6 +39,8 @@ public final class AlkoPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new LinkInformation(), this);
         this.getServer().getPluginManager().registerEvents(new ShopManager(), this);
         this.getServer().getPluginManager().registerEvents(new SitEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new MagicPickaxe(), this);
+        //this.getServer().getPluginManager().registerEvents(new BeerPotion(), this);
         this.getCommand("link").setTabCompleter(new LinkTabCompleter());
         this.getCommand("setHome").setExecutor(new SetHomeCommand());
         this.getCommand("home").setExecutor(new HomeCommand());
